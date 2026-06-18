@@ -1,0 +1,94 @@
+[
+    {
+        "run": "deep_adam_0.01_bs64_noaug_do0.5",
+        "best_val_acc": 0.2629745733194009
+    },
+    {
+        "run": "deep_adam_0.003_bs64_noaug_do0.5",
+        "best_val_acc": 0.46847788227098575
+    },
+    {
+        "run": "deep_adam_0.001_bs64_noaug_do0.5",
+        "best_val_acc": 0.5989202368512714
+    },
+    {
+        "run": "deep_adam_0.0005_bs64_noaug_do0.5",
+        "best_val_acc": 0.6119818878439568
+    },
+    {
+        "run": "deep_adam_0.0003_bs64_noaug_do0.5",
+        "best_val_acc": 0.6079763148728666
+    },
+    {
+        "run": "deep_adam_0.0001_bs64_noaug_do0.5",
+        "best_val_acc": 0.5989202368512714
+    },
+    {
+        "run": "deep_sgd_0.01_bs64_noaug_do0.5",
+        "best_val_acc": 0.6015325670498084
+    },
+    {
+        "run": "deep_sgd_0.03_bs64_noaug_do0.5",
+        "best_val_acc": 0.25130616509926856
+    },
+    {
+        "run": "deep_sgd_0.003_bs64_noaug_do0.5",
+        "best_val_acc": 0.5990943921978404
+    },
+    {
+        "run": "deep_adam_0.001_bs64_light_do0.5",
+        "best_val_acc": 0.6015325670498084
+    },
+    {
+        "run": "deep_adam_0.001_bs64_strong_do0.5",
+        "best_val_acc": 0.5440613026819924
+    },
+    {
+        "run": "deep_adam_0.001_bs64_noaug_do0.25",
+        "best_val_acc": 0.6145942180424939
+    },
+    {
+        "run": "deep_adam_0.001_bs64_noaug_do0",
+        "best_val_acc": 0.6198188784395681
+    },
+    {
+        "run": "deep_adam_0.001_bs64_light_do0.5_wd1e-4",
+        "best_val_acc": 0.5919540229885057
+    },
+    {
+        "run": "deep_adam_0.001_bs64_light_do0.5_wd5e-4",
+        "best_val_acc": 0.5888192267502612
+    },
+    {
+        "run": "deep_adam_0.001_bs32_light_do0.5",
+        "best_val_acc": 0.598571926158133
+    },
+    {
+        "run": "deep_adam_0.001_bs128_light_do0.5",
+        "best_val_acc": 0.576105886450714
+    },
+    {
+        "run": "deep_adam_0.001_bs64_light_do0.5_sched",
+        "best_val_acc": 0.6093695576454197
+    },
+    {
+        "run": "deep_adam_0.0003_bs64_strong_do0.5_wd1e-4",
+        "best_val_acc": 0.5893416927899686
+    },
+    {
+        "run": "deep_adam_0.0003_bs64_strong_do0.25_wd1e-4",
+        "best_val_acc": 0.612156043190526
+    },
+    {
+        "run": "deep_adam_0.001_bs64_noaug_do0.5_nobn",
+        "best_val_acc": 0.5794148380355277
+    },
+    {
+        "run": "deep_adam_0.001_bs32_noaug_do0_overfit",
+        "best_val_acc": 0.6243469174503657
+    },
+    {
+        "run": "deep_adam_0.0001_bs128_noaug_do0.5_underfit",
+        "best_val_acc": 0.47962382445141066
+    }
+]

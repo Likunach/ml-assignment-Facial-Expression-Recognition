@@ -4,7 +4,7 @@ import torch.nn as nn
 import wandb
 from tqdm import tqdm
 
-def train(model, train_loader, val_loader, config, device='cpu'):
+def train(model, train_loader, val_loader, config, device='cpu', checkpoint_dir=None):
     run_name = config['run_name']
     epochs = config['epochs']
     lr = config['lr']
@@ -35,8 +35,10 @@ def train(model, train_loader, val_loader, config, device='cpu'):
     model.to(device)
     best_val_acc = 0.0
 
-    os.makedirs("checkpoints", exist_ok=True)
-    checkpoint_path = os.path.join("checkpoints", f"{run_name}_best.pt")
+    if checkpoint_dir is None:
+        checkpoint_dir = "checkpoints"
+    os.makedirs(checkpoint_dir, exist_ok=True)
+    checkpoint_path = os.path.join(checkpoint_dir, f"{run_name}_best.pt")
 
     for epoch in tqdm(range(epochs), desc=f'{run_name} | Epochs'):
         # ── training ──
@@ -96,6 +98,7 @@ def train(model, train_loader, val_loader, config, device='cpu'):
         if val_acc > best_val_acc:
             best_val_acc = val_acc
             torch.save(model.state_dict(), checkpoint_path)
+            wandb.save(checkpoint_path)
 
         tqdm.write(
             f'Epoch {epoch+1}/{epochs} | '

@@ -1,0 +1,58 @@
+[
+  {
+    "run": "tiny_adam_0.001_bs64_light_do0",
+    "best_val_acc": 0.5566004876349704
+  },
+  {
+    "run": "tiny_adam_0.001_bs64_strong_do0",
+    "best_val_acc": 0.5369209334726576
+  },
+  {
+    "run": "tiny_adam_0.001_bs64_noaug_do0.5",
+    "best_val_acc": 0.5337861372344131
+  },
+  {
+    "run": "tiny_adam_0.001_bs64_noaug_do0",
+    "best_val_acc": 0.520027864855451
+  },
+  {
+    "run": "tiny_sgd_0.01_bs64_noaug_do0",
+    "best_val_acc": 0.5186346220828979
+  },
+  {
+    "run": "tiny_adam_0.001_bs64_noaug_do0.25",
+    "best_val_acc": 0.5165447579240683
+  },
+  {
+    "run": "tiny_adam_0.001_bs128_noaug_do0",
+    "best_val_acc": 0.5106234761407176
+  },
+  {
+    "run": "tiny_adam_0.0003_bs64_noaug_do0",
+    "best_val_acc": 0.5095785440613027
+  },
+  {
+    "run": "tiny_adam_0.001_bs32_noaug_do0_overfit",
+    "best_val_acc": 0.49808429118773945
+  },
+  {
+    "run": "tiny_adam_0.001_bs32_noaug_do0",
+    "best_val_acc": 0.49721351445489376
+  },
+  {
+    "run": "tiny_adam_0.0001_bs64_noaug_do0",
+    "best_val_acc": 0.4820619993033786
+  },
+  {
+    "run": "tiny_sgd_0.001_bs64_noaug_do0",
+    "best_val_acc": 0.43695576454197144
+  },
+  {
+    "run": "tiny_adam_0.0001_bs128_noaug_do0.5_underfit",
+    "best_val_acc": 0.4068268895855103
+  },
+  {
+    "run": "tiny_adam_0.01_bs64_noaug_do0",
+    "best_val_acc": 0.25130616509926856
+  }
+]
