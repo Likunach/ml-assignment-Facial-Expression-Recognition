@@ -328,8 +328,6 @@ ImageNet pretrained ResNet18, 1-channel input is repeated to 3 channels. Two mod
 1. **Forward check** -  გადაეცემა რეალური batch, მოწმდება output shape (batch, 7), NaN/inf.
 2. **Backward check** - `CrossEntropyLoss` + `loss.backward()`, სავარჯიშო პარამეტრებს აქვთ არანულოვანი, ვალიდური გრადიენტები.
 
-This does not require new Wandb runs - running it once per architecture is enough for validation.
-
 ---
 
 ## საუკეთესო მოდელის შერჩევა და Submission
