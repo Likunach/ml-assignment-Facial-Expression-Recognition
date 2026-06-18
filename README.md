@@ -321,6 +321,48 @@ ImageNet pretrained ResNet18, 1-channel input is repeated to 3 channels. Two mod
 
 ---
 
+## Overfitting / Underfitting ანალიზი
+
+ყველა არქიტექტურაზე გავუშვი verfit და underfit კონფიგურაციები. ყველა გაშვებაზე Wandb-ში ლოგდება `train_acc` და `val_acc` თითოეულ ეპოქაზე. train–val დაშორება overfitting-ის პირდაპირი ნიშანია.
+
+### კონფიგურაციების შაბლონი
+
+| რეჟიმი | ტიპური პარამეტრები | მიზანი |
+|--------|-------------------|--------|
+| **Overfit** | `lr=0.001`, `bs=32`, `aug=none`, `dropout=0`, `weight_decay=0`, 30–40 epoch | მაღალი ტევადობა + სუსტი რეგულარიზაცია → მოდელი ისწავლის train-ს, val ჩამორჩება |
+| **Underfit** | `lr=0.0001`, `bs=128`, `aug=none`, `dropout=0.5`, 5 epoch (Transfer frozen: 3 epoch) | ძალიან ნელი სწავლა + ძლიერი რეგულარიზაცია + ცოტა epoch → მოდელი ვერ იჭერებს რთულ ნიმუშებს |
+| **Balanced** | sweep-იდან შერჩეული aug / dropout / wd / scheduler | საუკეთესო კომპრომისი train და val შორის |
+
+### შედეგები არქიტექტურების მიხედვით
+
+| Architecture | Best val_acc | Overfit val_acc | Underfit val_acc | What caused it |
+|--------------|-------------:|----------------:|-----------------:|----------------|
+| TinyCNN | 0.5566 | 0.4981 | 0.4068 | Small capacity. Even on overfit runs train is much higher than val. On underfit the model cannot learn well. |
+| MediumCNN | 0.6169 | 0.5707 | 0.4056 | More depth raised overfitting risk. Augmentation and dropout improved generalization. |
+| DeepCNN | 0.6243* | 0.6243* | 0.4796 | The overfit setup gave the best val score. Underfit at about 48% means the model learns too little in practice. |
+| VGG | 0.6546 | 0.5378 | 0.4894 | The largest model falls hard on val when overfitting. On the balanced run strong augmentation and weight decay keep train and val closer. |
+| ResNet | 0.6327 | 0.6076 | 0.3572 | Skip connections stabilize training but the overfit setup still shows a train val gap. Underfit is the weakest of all runs. |
+| Transfer | 0.6327 | 0.6109 | 0.2698 | Overfit came from a high learning rate during finetune. Underfit used a frozen backbone so only the head trained and the signal stayed weak. |
+
+\*DeepCNN-ის საუკეთესო გაშვება თავად overfit კონფიგურაციაა ეს აჩვენებს იმას, რომ ამ არქიტექტურაზე რეგულარიზაციის გარეშე მაღალი val მიღწევადია, მაგრამ train–val gap Wandb-ზე მაინც ჩანს.
+
+### რა ვნახე Wandb-ში (train vs val)
+
+- **Overfit გაშვებები:** `train_acc` სწრაფად იზრდება, `val_acc` ჭეშმარიტება ან ჩამორჩება - კლასიკური overfitting.
+- **Underfit გაშვებები:** train და val ორივე დაბალია და ნელი იზრდება - მოდელს არ აქვს საკმარისი სიმძლავრე ან დრო სასარგებლო ნიმუშების სასწავლად.
+- **Balanced best runs:** train და val ერთად იზრდება, gap პატარა რჩება - აქედან ავირჩიე submission-ისთვის VGG.
+
+### დასკვნა (overfit / underfit)
+
+1. **Capacity** (Tiny → VGG) ზრდის overfitting-ის რისკს, თუ aug/dropout/wd არ არის.
+2. **Augmentation + dropout + weight decay** ამცირებს train–val gap-ს და აუმჯობესებს გენერალიზაციას.
+3. **Underfit** განზრახ გაშვებებმა დაადასტურა, რომ პრობლემა ზოგჯერ არა overfitting-შია, არამედ ძალიან ნელი სწავლაში ან ძალიან ძლიერ რეგულარიზაციაში.
+4. **Transfer frozen underfit** განსხვავებული შემთხვევაა: backbone ფიქსირებულია, ამიტომ მოდელი ვერ ადაპტირდება FER-ის პატარა grayscale სახეებზე.
+
+ჩარტები: `*_overfit_underfit.png` (Deep, VGG, ResNet, Transfer), `mediumcnn_overfit.png`. სრული train/val კურვები - [Wandb პროექტი](https://wandb.ai/lchit22-free-university-of-tbilisi-/fer2013-expression-recognition) და [Wandb Report](https://api.wandb.ai/links/lchit22-free-university-of-tbilisi-/rsznxffa).
+
+---
+
 ## Forward და Backward შემოწმება
 
 თითოეულ საექსპერიმენტო notebook-ს აქვს სექცია **3b sanity check**:
