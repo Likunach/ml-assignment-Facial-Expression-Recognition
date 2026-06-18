@@ -386,7 +386,7 @@ best = max(all_arch_results, key=lambda x: x['best_val_acc'])
 
 შერჩეული არქიტექტურათაშორისი ანალიზი, ჩარტები და გაშვებების შედარებები:
 
-**[Wandb Report](https://wandb.ai/lchit22-free-university-of-tbilisi-/fer2013-expression-recognition)**
+**[Wandb Report — Facial Expression Recognition](https://api.wandb.ai/links/lchit22-free-university-of-tbilisi-/rsznxffa)**
 
 ---
 
